@@ -22,6 +22,7 @@ class Program
             answer = Console.ReadLine();
 
             Scriptures scriptures = new Scriptures();
+            string scripture = scriptures.GetDisplayText();
 
         }
 
