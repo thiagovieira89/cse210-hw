@@ -1,24 +1,42 @@
+using System.Dynamic;
 using System.Linq.Expressions;
+using System;
 
 public class Scriptures
 {
-    private string _reference;
-    private string _words;
+    private Reference _reference;
+    private List<Word> _words;
 
-    public Scriptures(string reference)
+    public Scriptures(Reference Reference, string text)
     {
-        _reference = reference;
-    }
-    public Scriptures(string word)
-    {
-        string word List<Word> = new List<Word>;
-        _words = word;
+        _reference = Reference;
+        _words = NewWordList(text);    
 
     }
-    public void HideRandowWords()
+    private List<Word> NewWordList(string text)
+    {
+        List<Word> wordList = new List<Word>();
+
+        string[] words = text.Split(new char [] {' '},StringSplitOptions.RemoveEmptyEntries);
+
+        foreach (string word in words)
+        {
+            Word newWord = new Word(word);
+            wordList.Add(newWord);
+        }
+        return wordList;
+    }
+    public void HideRandomWords(int numberToHide)
     {   
-        string choice = new Random()
-        string choice = new List<Word>;
-        choice.
+        
+    }
+
+    public string GetDisplayText()
+    {
+        return $"{_reference} : {_words}";
+    }
+    public bool isCompletelyHidden()
+    {
+        
     }
 }
