@@ -7,9 +7,9 @@ public class Scriptures
     private Reference _reference;
     private List<Word> _words;
 
-    public Scriptures(Reference Reference, string text)
+    public Scriptures(Reference reference, string text)
     {
-        _reference = Reference;
+        _reference = reference;
         _words = NewWordList(text);    
 
     }
@@ -17,7 +17,7 @@ public class Scriptures
     {
         List<Word> wordList = new List<Word>();
 
-        string[] words = text.Split(new char [] {' '},StringSplitOptions.RemoveEmptyEntries);
+        string[] words = text.Split(" ");
 
         foreach (string word in words)
         {
@@ -28,15 +28,33 @@ public class Scriptures
     }
     public void HideRandomWords(int numberToHide)
     {   
-        
+        _words.ElementAt(numberToHide).hide();
     }
 
     public string GetDisplayText()
     {
-        return $"{_reference} : {_words}";
+        string text = "";
+        foreach(Word word in _words){
+            if(!word.IsHidden()){
+                text = text + " " + word.GetDisplayText();
+            }else{
+                text = text + " " + "____";
+            }
+        }
+        return $"{_reference.GetDisplayText()} : {text}";
     }
     public bool isCompletelyHidden()
     {
-        
+        foreach (Word word in _words)
+        {
+            if(!word.IsHidden()){
+                return false;
+            }
+        }
+        return true;       
+    }
+
+    public List<Word> getWords(){
+        return _words;
     }
 }
