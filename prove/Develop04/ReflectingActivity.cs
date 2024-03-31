@@ -26,10 +26,11 @@ public class ReflectingActivity : Activity
         Console.Write("Get ready");
         test.ShowSpinner();
         Console.WriteLine("");
-        test.GetPrompts();
+        
         Console.WriteLine("How many time do you want to intend to do this activity (in seconds)?  ");
         string answer = Console.ReadLine();
         int duration = int.Parse(answer);
+        
         Console.WriteLine("Considering the following prompt:  \n");
         test.DisplayPrompt();
         Console.WriteLine("Think about and after press ENTER to continue.\n");
@@ -88,15 +89,10 @@ public class ReflectingActivity : Activity
     }
     public void DisplayPrompt()
     {
-        ReflectingActivity showRandomPrompt = new ReflectingActivity("", "", 0, prompt, questions);
-        string showPromp = showRandomPrompt.GetRandomPrompt();
-        Console.WriteLine(showPromp);
+        Console.WriteLine(GetRandomPrompt());
     }
     public void DisplayQuestion()
     {
-        ReflectingActivity showRandomQuestion = new ReflectingActivity("", "", 0, prompt, questions);
-        string showQuestion = showRandomQuestion.GetRandomQuestion(); 
-        Console.WriteLine(showQuestion);
-
+        Console.WriteLine(GetRandomQuestion());
     }
 }
