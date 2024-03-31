@@ -13,7 +13,8 @@ class Program
         while (user != 0)
         {
            Console.Write("Enter Number:");
-           user = int.Parse(Console.ReadLine());
+           
+           
            numbers.Add(user);
            
         }
