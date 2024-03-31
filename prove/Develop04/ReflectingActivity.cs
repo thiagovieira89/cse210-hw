@@ -26,29 +26,32 @@ public class ReflectingActivity : Activity
         Console.Write("Get ready");
         test.ShowSpinner();
         Console.WriteLine("");
-        test.GetRandomQuestion();
-        test.GetRandomQuestion();
-        Console.WriteLine("How many time do you want to spend in this activity (in seconds)?  ");
+        test.GetPrompts();
+        Console.WriteLine("How many time do you want to intend to do this activity (in seconds)?  ");
         string answer = Console.ReadLine();
         int duration = int.Parse(answer);
-        Console.WriteLine("Considering the following prompt:  ");
+        Console.WriteLine("Considering the following prompt:  \n");
         test.DisplayPrompt();
-        Console.WriteLine("Think about and after press ENTER to continue.");
+        Console.WriteLine("Think about and after press ENTER to continue.\n");
         Console.Write("You will star in...");
         test.ShowCountDown(5);
-
+        Console.WriteLine("");
+        
 
         DateTime starTime = DateTime.Now;
         DateTime futureTime = starTime.AddSeconds(duration);
 
         DateTime currentTime = DateTime.Now;
         int count = 0;
+
         while (currentTime < futureTime)
         {
-            test.DisplayQuestion(); test.ShowSpinner();
+            test.DisplayQuestion();test.ShowSpinner();
+            Thread.Sleep(8000);
             currentTime = DateTime.Now;
             count++;
         }
+        Console.WriteLine($"You finished this activity in {duration} seconds");
     }
     List<string> prompt = new List<string>();
 
@@ -56,24 +59,28 @@ public class ReflectingActivity : Activity
 
     public string GetRandomQuestion()
     {
-        prompt.Add("Think of a time when you stood up for someone else.");
-        prompt.Add("Think of a time when you did something really difficult.");
-        prompt.Add("Think of a time when you helped someone in need.");
-        prompt.Add("Think of a time when you did something truly selfless.");
-        Random random = new Random();
-        int choice = random.Next(questions.Count);
-        string randomChoice = questions[choice];
-
-        return randomChoice;
-    }
-    public string GetRandomPrompt()
-    {
         questions.Add("Who are people that you appreciate?");
         questions.Add("What are personal strengths of yours?");
         questions.Add("Who are people that you have helped this week?");
         questions.Add("When have you felt the Holy Ghost this month?");
         questions.Add("Who are some of your personal heroes?");
+
+        Random random  = new Random();
+        int choice = random.Next(questions.Count);
+        string randomChoice = questions[choice];
+
+        return randomChoice;
+    }
+    
+    public string GetRandomPrompt()
+    {
+        prompt.Add("Think of a time when you stood up for someone else.");
+        prompt.Add("Think of a time when you did something really difficult.");
+        prompt.Add("Think of a time when you helped someone in need.");
+        prompt.Add("Think of a time when you did something truly selfless.");
+        
         Random random = new Random();
+        
         int phrase = random.Next(prompt.Count);
         string randomChoice = prompt[phrase];
 
@@ -82,12 +89,14 @@ public class ReflectingActivity : Activity
     public void DisplayPrompt()
     {
         ReflectingActivity showRandomPrompt = new ReflectingActivity("", "", 0, prompt, questions);
-        showRandomPrompt.GetRandomPrompt();
+        string showPromp = showRandomPrompt.GetRandomPrompt();
+        Console.WriteLine(showPromp);
     }
     public void DisplayQuestion()
     {
         ReflectingActivity showRandomQuestion = new ReflectingActivity("", "", 0, prompt, questions);
-        showRandomQuestion.GetRandomQuestion(); Thread.Sleep(8000);
+        string showQuestion = showRandomQuestion.GetRandomQuestion(); 
+        Console.WriteLine(showQuestion);
 
     }
 }
