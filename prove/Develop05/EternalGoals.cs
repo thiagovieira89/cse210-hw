@@ -17,10 +17,14 @@ public class EternalGoals : Goal
     }
     public override string GetDetailsString()
     {
-        return $"[ ] - {GetName()} ({GetDescription()})";
+        string retorno = "[ ]";
+        if(IsCompleted()){
+            retorno = "[ X ]";
+        }
+        return $"{retorno} - {GetName()} ({GetDescription()})";
     }
      public override string GetStringRepresentation()
     {
-        return $"[ ] - {GetName()} ({GetDescription()}) {IsCompleted()}";
+        return $"EternalGoal: {GetName()}, {GetDescription()}, {GetPoints()}";
     }
 }

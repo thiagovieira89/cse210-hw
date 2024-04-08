@@ -28,11 +28,15 @@ public class SimpleGoal : Goal
     }
     public override string GetDetailsString()
     {
-        return $"[ ] - {GetName()} ({GetDescription()})";
+        string retorno = "[ ]";
+        if(IsCompleted()){
+            retorno = "[ X ]";
+        }
+        return $"{retorno} - {GetName()} ({GetDescription()})";
     }
      public override string GetStringRepresentation()
     {
-        return $"[ ] - {GetName()} ({GetDescription()}) {IsCompleted()}";
+        return $"SimpleGoal: {GetName()}, {GetDescription()}, {GetPoints()}, {IsCompleted()}";
     }
 
 }

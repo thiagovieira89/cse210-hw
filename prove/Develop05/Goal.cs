@@ -16,9 +16,18 @@ public abstract class Goal
    {
     return _points;
    }
+   public string SetPoints(string points)
+   {
+    _points = points;
+    return _points;
+   }
    public string GetName()
    {
     return _shortName;
+   }
+   public void SetName(string name)
+   {
+    _shortName = name;
    }
    public string GetDescription()
    {
